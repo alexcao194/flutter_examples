@@ -20,12 +20,35 @@ class User {
 
     return true;
   }
+}
 
-  void saveToFirebase() {
-    // save to database
+
+interface class UserRepository {
+  void saveUser(User user) {
+    // save to db
   }
+}
 
-  void sendVerificationMail() {
-    // send verification mail
+class UserRepositoryWithFirebase implements UserRepository {
+  void saveUser(User user) {
+    // save to firebase with Firebase SDK
+  }
+}
+
+class UserRepositoryWithMongoDB implements UserRepository {
+  void saveUser(User user) {
+    // save to MongoDB with MongoDB SDK
+  }
+}
+
+class Authentication {
+  UserRepository userRepository;
+
+  Authentication(this.userRepository);
+
+  void register(User user) {
+    if (user.isValid()) {
+      userRepository.saveUser(user);
+    }
   }
 }

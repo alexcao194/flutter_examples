@@ -1,17 +1,32 @@
-abstract class Bird {
+abstract class Sleepable {
+  void sleep();
+}
+
+abstract class Flyable {
   void fly();
 }
 
-class Eagle extends Bird {
+class Eagle implements Sleepable, Flyable {
   @override
   void fly() {
     print('Eagle is flying');
   }
+
+  @override
+  void sleep() {
+    print('Eagle is sleeping');
+  }
+
 }
 
-class Penguin extends Bird {
+class MechanicalBird implements Flyable {
   @override
   void fly() {
-    throw Exception('Penguin cannot fly');
+    print('Mechanical bird is flying');
+  }
+
+  @override
+  void sleep() {
+    print('Mechanical bird is sleeping');
   }
 }
