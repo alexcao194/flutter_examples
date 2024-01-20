@@ -47,35 +47,39 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<TestBloc, TestState>(
       builder: (context, state) {
-        return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: Text(widget.title),
-            ),
-            body: Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(state.data),
+        return SafeArea(
+          child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                title: Text(widget.title),
+              ),
+              body: SafeArea(
+                child: Center(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(state.data),
+                        ],
+                      ),
+                      if (state.loading)
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                     ],
                   ),
-                  if (state.loading)
-                    const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                ],
+                ),
               ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                _test();
-              },
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            ));
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  _test();
+                },
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              )),
+        );
       },
     );
   }
